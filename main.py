@@ -65,38 +65,30 @@ def sort(meaning):
     print(meaning)
     final = ''
     try:
-        num = 0
         noun = meaning['Noun']
         final += "Noun: \n"
-        for men in noun:
-            num += 1
+        for num, men in enumerate(noun, start=1):
             final += f"{num}: {men}\n"
     except:
         pass
     try:
-        num = 0
         Verb = meaning['Verb']
         final += f"Verb: \n"
-        for men in Verb:
-            num += 1
+        for num, men in enumerate(Verb, start=1):
             final += f"{num}: {men}\n"
     except:
         pass
     try:
-        num = 0
         Adverb = meaning['Adverb']
         final += f"Adverb: \n"
-        for men in Adverb:
-            num += 1
+        for num, men in enumerate(Adverb, start=1):
             final += f"{num}: {men}\n"
     except:
         pass
     try:
-        num = 0
         Adjective = meaning['Adjective']
         final += f"Adjective: \n"
-        for men in Adjective:
-            num += 1
+        for num, men in enumerate(Adjective, start=1):
             final += f"{num}: {men}\n"
     except:
         pass
@@ -106,7 +98,7 @@ def sort(meaning):
 window = sg.Window('PyDictionary', layout, icon='book.ico')
 while True:
     event, values = window.read()
-    if event == sg.WINDOW_CLOSED or event == 'Quit':
+    if event in [sg.WINDOW_CLOSED, 'Quit']:
         break
     elif event == 'meaningsearch':
         meaning = sort(PyDictionary.meaning(values['meaning']))
@@ -120,8 +112,6 @@ while True:
             for syn in synonym:
                 num += 1
                 finalsynonyms += f"{num}: {syn}\n"
-            else:
-                pass
         window['synonymres'].update(finalsynonyms)
 
     elif event == 'antonymmsearch':
@@ -132,8 +122,6 @@ while True:
             for ant in antonym:
                 num += 1
                 finallantonyms += f'{num}: {ant}\n'
-        else:
-            pass
         window['antonymres'].update(finallantonyms)
 
 window.close()
